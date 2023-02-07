@@ -12,12 +12,18 @@ ports=$(ss -tl | awk '/^LISTEN/ { split($4, a, ":"); print a[2]; }')
 for ip in "${ips[@]}"; do
   # Apply iptables rule to block all incoming traffic to the given IP
   iptables -A INPUT -s $ip -j DROP
+
   # Loop over the list of listening TCP ports
   for port in $ports; do
-    # Apply iptables rule to allow incoming traffic to the given IP and port
-    iptables -I INPUT -s $ip -p tcp --dport $port -j ACCEPT
+    # Check if an iptables rule for the current IP and port already exists
+    rule_exists=$(iptables -S | grep -c "^-A INPUT -s $ip -p tcp --dport $port -j ACCEPT")
+    if [ $rule_exists -eq 0 ]; then
+      # Apply iptables rule to allow incoming traffic to the given IP and port
+      iptables -I INPUT -s $ip -p tcp --dport $port -j ACCEPT
+    fi
   done
 done
 
 # Save the iptables rules
 iptables-save
+
