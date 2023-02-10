@@ -1,16 +1,4 @@
 https://blog.remirepo.net/public/LVM.pdf 
 
-Logical Volume Management (LVM) is a disk management system used to manage and organize disk space on a Linux system. It allows you to create virtual partitions that can be resized and moved dynamically, without having to shut down the system or unmount any file systems.
-
-Here's a simple explanation of how LVM works:
-
-    Physical Volumes (PVs): The first step in using LVM is to create one or more physical volumes (PVs) on your disk. These are actual disk partitions that will be used to store data.
-
-    Volume Group (VG): The next step is to create a volume group (VG), which is a collection of one or more physical volumes. This is where the magic of LVM happens, as the VG is used to manage the disk space of all its physical volumes as a single pool of storage.
-
-    Logical Volumes (LVs): The final step is to create one or more logical volumes (LVs) within the VG. These are virtual partitions that appear as normal disk partitions to the operating system, but they are actually just pointers to the physical storage in the VG.
-
-Example:
-Let's say you have two hard disks, each with a capacity of 500 GB. With LVM, you can create a single 1 TB virtual disk that spans both physical disks. This makes it easy to allocate space and resize partitions as needed.
-
-For example, you could create a 500 GB logical volume for your root file system, and another 500 GB logical volume for your home directory. If you need to resize your root file system, you can simply increase the size of the root LV, and the VG will automatically allocate the needed space from the free space in the VG.
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_and_managing_logical_volumes/managing-lvm-physical-volumes_configuring-and-managing-logical-volumes#creating-lvm-physical-volume_managing-lvm-physical-volumes
+https://unexpectd.com/post/lvm-raid1/
